@@ -1,11 +1,22 @@
 package com.blz;
 
-public class FindMaximumProblem {
+//generic class
+public class FindMaximumProblem<T extends Comparable<T>> {
+	T a;
+	T b;
+	T c;
+
+	// constructor
+	public FindMaximumProblem(T a, T b, T c) {
+		this.a = a;
+		this.b = b;
+		this.c = c;
+	}
+
 	/*
-	 * This generic method is used to Refactor all the 3(Integer, float, String) to
-	 * One Generic Method and find the maximum value
+	 * This generic method is used to find max among 3 variables of Generic Type
 	 */
-	public static <T extends Comparable<T>> T maximum(T a, T b, T c) {
+	public static <T extends Comparable<T>> T testMaximum(T a, T b, T c) {
 		T max = a; // assume a is initially the largest
 
 		if (b.compareTo(max) > 0) {
@@ -20,8 +31,10 @@ public class FindMaximumProblem {
 	// main method
 	public static void main(String[] args) {
 		// Calling method And passing values
-		System.out.printf("Max of %d, %d and %d is %d\n\n", 3, 4, 5, maximum(3, 4, 5));
-		System.out.printf("Max of %.1f,%.1f and %.1f is %.1f\n\n", 6.6, 8.8, 7.7, maximum(6.6f, 8.8f, 7.7f));
-		System.out.printf("Max of %s, %s and %s is %s\n", "Priya", "Anu", "Sonu", maximum("Priya", "Anu", "Sonu"));
+		System.out.printf("Max of %d, %d and %d is %d\n\n", 3, 4, 5, FindMaximumProblem.<Integer>testMaximum(3, 4, 5));
+		System.out.printf("Max of %.1f,%.1f and %.1f is %.1f\n\n", 6.6, 8.8, 7.7,
+				FindMaximumProblem.<Float>testMaximum(6.6f, 8.8f, 7.7f));
+		System.out.printf("Max of %s, %s and %s is %s\n", "Apple", "Pear", "Banana",
+				FindMaximumProblem.<String>testMaximum("Priya", "Anu", "Sonu"));
 	}
 }
