@@ -2,39 +2,39 @@ package com.blz;
 
 //generic class
 public class FindMaximumProblem<T extends Comparable<T>> {
-	T a;
-	T b;
-	T c;
-
-	// constructor
-	public FindMaximumProblem(T a, T b, T c) {
-		this.a = a;
-		this.b = b;
-		this.c = c;
+	/*
+	 * This generic method is used to find max among more than 3 variables of
+	 * Generic Type
+	 */
+	@SafeVarargs
+	public static <T extends Comparable<T>> T testMaximum(T... value) {
+		T max = value[0]; // assume a is initially the largest
+		// checking max value
+		for (int i = 1; i < value.length; i++) {
+			if (value[i].compareTo(max) > 0) {
+				max = value[i];
+			}
+		}
+		System.out.println("given values are : ");
+		for (int i = 0; i < value.length; i++) {
+			System.out.println(value[i]);
+		}
+		printMax(max);// internally calling printMax generic method
+		return max; // returns the largest value
 	}
 
-	/*
-	 * This generic method is used to find max among 3 variables of Generic Type
-	 */
-	public static <T extends Comparable<T>> T testMaximum(T a, T b, T c) {
-		T max = a; // assume a is initially the largest
-
-		if (b.compareTo(max) > 0) {
-			max = b;
-		}
-		if (c.compareTo(max) > 0) {
-			max = c;
-		}
-		return max; // returns the largest value
+	// generic method to print the max value
+	public static <T> void printMax(T max) {
+		System.out.println("\nMaximum Value is= " + max + "\n");
 	}
 
 	// main method
 	public static void main(String[] args) {
 		// Calling method And passing values
-		System.out.printf("Max of %d, %d and %d is %d\n\n", 3, 4, 5, FindMaximumProblem.<Integer>testMaximum(3, 4, 5));
-		System.out.printf("Max of %.1f,%.1f and %.1f is %.1f\n\n", 6.6, 8.8, 7.7,
-				FindMaximumProblem.<Float>testMaximum(6.6f, 8.8f, 7.7f));
-		System.out.printf("Max of %s, %s and %s is %s\n", "Apple", "Pear", "Banana",
-				FindMaximumProblem.<String>testMaximum("Priya", "Anu", "Sonu"));
+		FindMaximumProblem.<Integer>testMaximum(3, 4, 5, 9, 20, 33);
+
+		FindMaximumProblem.<Float>testMaximum(6.6f, 8.8f, 7.7f, 9.3f);
+
+		FindMaximumProblem.<String>testMaximum("Priya", "Anu", "Sonu", "Monu", "Tanu");
 	}
 }
